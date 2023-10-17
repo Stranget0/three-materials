@@ -32,6 +32,13 @@ export function addBasicLights(controller: ThreeController, gui?: GUI) {
     p.add(l.position, "x").onFinishChange(() => controller.render());
     p.add(l.position, "y").onFinishChange(() => controller.render());
     p.add(l.position, "z").onFinishChange(() => controller.render());
+
+		if(l.shadow){
+			const s= f.addFolder("shadow")
+			s.add(l,"castShadow").onFinishChange(()=> controller.render());
+			s.add(l.shadow,"radius",0, 25,1).onFinishChange(()=> controller.render());
+			s.add(l.shadow,"blurSamples", 1, 25, 1).onFinishChange(()=> controller.render());
+		}
   }
   return { mainLight, hemiLight, subLight };
 }

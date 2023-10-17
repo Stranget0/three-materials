@@ -6,6 +6,7 @@ import {
   Light,
   Mesh,
   PCFSoftShadowMap,
+  VSMShadowMap,
 } from "three";
 import randomBetween from "./randomBetween";
 
@@ -62,14 +63,18 @@ export function enableShadows(
   for (const clm of controllerOrLightOrMeshArr) {
     if (clm instanceof Light) {
       clm.castShadow = true;
-
-      if (clm.shadow) clm.shadow.bias = 0.0001;
+      if (clm.shadow) {
+				clm.shadow.radius = 15
+				clm.shadow.blurSamples = 15
+      }
     } else if (clm instanceof Mesh) {
       clm.castShadow = true;
       clm.receiveShadow = true;
     } else {
       clm.renderer.shadowMap.enabled = true;
-      clm.renderer.shadowMap.type = PCFSoftShadowMap;
+      clm.renderer.shadowMap.type = VSMShadowMap;
+      // renderer.shadowMap.type = THREE.PCFShadowMap
+      //renderer.shadowMap.type = THREE.PCFSoftShadowMap
     }
   }
 
