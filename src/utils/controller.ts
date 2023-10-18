@@ -5,7 +5,6 @@ import {
   OrthographicCamera,
   Light,
   Mesh,
-  PCFSoftShadowMap,
   VSMShadowMap,
 } from "three";
 import randomBetween from "./randomBetween";
